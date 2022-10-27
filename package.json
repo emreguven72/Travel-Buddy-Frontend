@@ -1,25 +1,28 @@
 {
   "name": "travelbuddy",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "axios": "^1.1.3",
     "expo": "~46.0.16",
+    "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
     "expo-updates": "~0.14.6",
     "react": "18.0.0",
+    "react-dom": "18.0.0",
     "react-native": "0.69.6",
+    "react-native-screens": "~3.15.0",
+    "react-native-web": "~0.18.7",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.18.6"
   },
   "resolutions": {
     "styled-components": "^5"
