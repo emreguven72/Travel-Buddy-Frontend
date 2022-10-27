@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import styled from 'styled-components/native';
 import PressableButton from './components/PressableButton';
+import UserService from './services/userService';
 
 export default function App() {
+
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    let userService = new UserService();
+    userService.getAllUsers().then(result => setUsers(result.data)).catch((error) => {
+      console.log(error)
+    })
+  }, [])
+
   const handlePress = () => console.log("Text Pressed");
 
   const Container = styled.View({
@@ -20,8 +31,12 @@ export default function App() {
   })
 
   return (
-    <Container>
-      <AppText onPress={() => console.log('Text Clicked')} >Travel Buddy</AppText>
+    <Container>      
+
+    {
+      console.log(users)
+    }
+
       <PressableButton onPress={() => console.log('Button Clicked')} title='Button' bgColor='pink' />
       <StatusBar style="auto" />
     </Container>
