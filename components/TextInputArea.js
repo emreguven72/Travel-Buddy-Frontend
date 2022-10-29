@@ -17,6 +17,7 @@ const style = StyleSheet.create({
   textInputArea: {
     backgroundColor: "red",
     flex: 1,
-    borderRadius: 10
+    borderRadius: 10,
+    fontSize: 18
   },
 });

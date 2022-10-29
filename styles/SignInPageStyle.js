@@ -7,8 +7,8 @@ const baseStyle = StyleSheet.create({
     inputArea: {
         marginLeft: 'auto',
         marginRight: 'auto',
-        height: '5%',
-        width: '75%',
+        height: 40,
+        width: 250,
         marginTop: 50
     }
 })
