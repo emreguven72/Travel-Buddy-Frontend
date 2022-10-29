@@ -3,27 +3,38 @@ import { StyleSheet } from "react-native";
 const baseStyle = StyleSheet.create({
     container: {
         flex: 1,
-        
     },
-
     inputArea: {
-        
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        height: '5%',
+        width: '75%',
+        marginTop: 50
     }
 })
 
 export default {
-    pink: StyleSheet.create({
+    base: StyleSheet.create({
+        ...baseStyle
+    }),
+    dark: StyleSheet.create({
         ...baseStyle,
         container: {
             ...baseStyle.container,
-            backgroundColor: 'pink'
+            backgroundColor: 'black'
+        },
+        text: {
+            color: 'white'
         }
     }),
-    yellow: StyleSheet.create({
+    light: StyleSheet.create({
         ...baseStyle,
         container: {
             ...baseStyle.container,
-            backgroundColor: 'yellow'
+            backgroundColor: 'white'
+        },
+        text: {
+            color: 'black'
         }
     })
 }
