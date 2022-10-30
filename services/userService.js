@@ -3,22 +3,22 @@ import axios from 'axios';
 
 export default class UserService {
     getAllUsers() {
-        return axios.get('http://192.168.1.234:8080/api/users/getAll');
+        return axios.get('http://192.168.0.113:8080/api/users/getAll');
     }
 
-    createUser(email) {
-        return axios.post('http://192.168.1.234:8080/api/users/add',{
-            email: "huskan321@hotmail.com",
-            username: "aragazHuso",
-            password: "123",
-            name: "Huseyin",
-            surname: "Kan",
-            phoneNumber: "333"
-        }).then(() => console.log("User Created succesfully")).catch(() => console.log("User could not created"))
+    createUser(email,password,username,name,surname,phoneNumber) {
+        return axios.post('http://192.168.0.113:8080/api/users/add',{
+            email: email,
+            username: username,
+            password: password,
+            name: name,
+            surname: surname,
+            phoneNumber: phoneNumber
+        }).then(() => console.log("User Created succesfully")).catch((error) => console.log(error))
     }
 
     deleteUser(id) {
-        return axios.delete(`http://192.168.1.234:8080/api/users/delete?id=${id}`)
+        return axios.delete(`http://192.168.0.113:8080/api/users/delete?id=${id}`)
         .then(() => console.log("User Deleted successfully")).catch(() => console.log("User could not deleted"));
     }
 }

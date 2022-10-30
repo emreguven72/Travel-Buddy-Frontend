@@ -4,12 +4,12 @@ const baseStyle = StyleSheet.create({
     container: {
         flex: 1,
     },
-    inputArea: {
+    FormArea: {
+        flexDirection: 'column',
         marginLeft: 'auto',
         marginRight: 'auto',
-        height: 40,
-        width: 250,
-        marginTop: 40
+        marginTop: 100,
+        alignItems: 'center'
     }
 })
 

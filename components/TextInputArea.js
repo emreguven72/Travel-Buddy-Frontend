@@ -22,7 +22,7 @@ const style = StyleSheet.create({
     borderColor: '#CCC',
     height: 40,
     width: 250,
-    marginTop: 10,
+    marginTop: 15,
     paddingHorizontal: 6
   },
 });

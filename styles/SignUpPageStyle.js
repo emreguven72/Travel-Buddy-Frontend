@@ -9,7 +9,8 @@ const baseStyle = StyleSheet.create({
         flexDirection: 'column',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: 10
+        marginTop: 30,
+        alignItems: 'center'
     }
 })
 
