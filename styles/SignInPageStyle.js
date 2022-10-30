@@ -9,7 +9,7 @@ const baseStyle = StyleSheet.create({
         marginRight: 'auto',
         height: 40,
         width: 250,
-        marginTop: 50
+        marginTop: 40
     }
 })
 

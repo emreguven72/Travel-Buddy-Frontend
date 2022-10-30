@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity, Touchable } from "react-native";
 import styles from '../styles/WelcomePageStyle'
 
 
-const WelcomePage = () => {
+const WelcomePage = ({ navigation }) => {
     return(
         <View style={styles.base.MainContainer}>
             <View style={styles.base.TopTextContainer}>
@@ -12,12 +12,12 @@ const WelcomePage = () => {
                 </View>
                 <Text style={styles.base.SloganText}>A fun way to travel</Text>
             </View>
-            <TouchableOpacity style={styles.base.SignUpButton} activeOpacity={0.8}>
+            <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')} style={styles.base.SignUpButton} activeOpacity={0.8}>
                 <Text style={styles.base.SignUpButtonText}>Sign Up</Text>
             </TouchableOpacity>
             <View style={styles.base.LogInContainer}>
                 <Text style={styles.base.GotAccountText}>Got an account?</Text>
-                <TouchableOpacity activeOpacity={0.4}><Text style={styles.base.LogInText}>Log in</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')} activeOpacity={0.4}><Text style={styles.base.LogInText}>Log in</Text></TouchableOpacity>
             </View>
         </View>
     );
