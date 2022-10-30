@@ -13,7 +13,7 @@ const WelcomePage = () => {
                 <Text style={styles.base.SloganText}>A fun way to travel</Text>
             </View>
             <TouchableOpacity style={styles.base.SignUpButton} activeOpacity={0.8}>
-                <Text style={styles.base.SignUpButtonText}>Button</Text>
+                <Text style={styles.base.SignUpButtonText}>Sign Up</Text>
             </TouchableOpacity>
             <View style={styles.base.LogInContainer}>
                 <Text style={styles.base.GotAccountText}>Got an account?</Text>

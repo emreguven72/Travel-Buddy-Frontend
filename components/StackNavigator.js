@@ -1,0 +1,22 @@
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import WelcomePage from "../pages/WelcomePage";
+import SignInPage from "../pages/SignInPage";
+
+const Stack = createNativeStackNavigator();
+
+const StackNavigator = () => {
+    return(
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{headerShown:false}}
+                initialRouteName="WelcomeScreen"
+            >
+                <Stack.Screen name="WelcomeScreen" component={WelcomePage} />
+                <Stack.Screen name="SignInScreen" component={SignInPage} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+export default StackNavigator;
