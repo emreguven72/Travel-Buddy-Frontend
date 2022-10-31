@@ -13,7 +13,7 @@ const baseStyle = StyleSheet.create({
         alignItems: 'center',
     },
     LogoAndAppNameContainer: {
-        flexDirection: 'row'
+        flexDirection: 'column'
     },
     AppNameText: {
         fontSize: 36,
@@ -23,13 +23,13 @@ const baseStyle = StyleSheet.create({
     },
     SloganText: {
         fontSize: 20,
-        marginTop: 20,
+        marginTop: 10,
         color: '#674747'
     },
     Logo: {
-        height: 50,
-        width: 50,
-        borderRadius: 20
+        height: 100,
+        width: 200,
+        resizeMode: 'contain'
     },
     SignUpButton: {
         backgroundColor: '#53D8A9',

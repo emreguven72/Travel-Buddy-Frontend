@@ -3,17 +3,15 @@ import { Text, SafeAreaView, TextInput, StatusBar, View, TouchableOpacity } from
 import styles from "../styles/SignInPageStyle";
 import TextInputArea from "../components/TextInputArea";
 import BasicButton from "../components/BasicButton";
+import { Formik } from "formik";
 
 const SignInPage = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
     const goBack = () => {
       navigation.goBack();
     }
 
-    const logIn = () => {
-      if(email!=''&&password!='') {
+    const logIn = (formValues) => {
+      if(formValues.email!=''&&formValues.password!='') {
         if(true /* bilgiler doğruysa */) {
           console.log('Giriş yapıldı');
         } else {
@@ -24,12 +22,12 @@ const SignInPage = ({ navigation }) => {
       }
     }
 
-    const LogInButton = () => {
+    const LogInButton = ({ onPress }) => {
       return(
         <View style={{marginTop:30}}>
           <BasicButton 
             title='Log In'
-            onPress={logIn}
+            onPress={onPress}
             color='#BBB'
           />
         </View>
@@ -41,19 +39,29 @@ const SignInPage = ({ navigation }) => {
       <TouchableOpacity onPress={goBack} style={{marginTop: 10, marginLeft: 10}} >
         <Text>go Back</Text>
       </TouchableOpacity>
-      <View style={styles.base.FormArea} >
-        <TextInputArea
-            placeholder='Email'
-            value={email}
-            onChangeText={setEmail}
-        />
-        <TextInputArea
-            placeholder='Password'
-            value={password}
-            onChangeText={setPassword}
-        />
-        <LogInButton />
-      </View>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={logIn}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <View style={styles.base.FormArea} >
+            <TextInputArea
+                placeholder='Email'
+                value={values.email}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+            />
+            <TextInputArea
+                placeholder='Password'
+                value={values.password}
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+            />
+            <LogInButton onPress={handleSubmit}/>
+          </View>
+        )}
+        
+      </Formik>
     </View>
   );
 }

@@ -3,16 +3,10 @@ import styles from '../styles/SignUpPageStyle';
 import { View, TouchableOpacity, TextInput, Text } from "react-native";
 import TextInputArea from "../components/TextInputArea";
 import BasicButton from "../components/BasicButton";
-import UserService from '../services/UserService'
+import UserService from '../services/userService'
+import { Formik } from "formik";
 
 const SignUpPage = ({ navigation }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-
     const goBack = () => {
         navigation.goBack();
     }
@@ -25,11 +19,11 @@ const SignUpPage = ({ navigation }) => {
         );
     }
 
-    const signUp = () => {
-        if(email!=''&&password!=''&&username!=''&&name!=''&&surname!=''&&phoneNumber!='') {
+    const signUp = (formValues) => {
+        if(formValues.email!=''&&formValues.password!=''&&formValues.username!=''&&formValues.name!=''&&formValues.surname!=''&&formValues.phoneNumber!='') {
             if(true /* Geçerli bilgiler girildi */) {
                 let userService = new UserService();
-                userService.createUser(email,password,username,name,surname,phoneNumber);
+                userService.createUser(formValues.email,formValues.password,formValues.username,formValues.name,formValues.surname,formValues.phoneNumber);
                 navigation.navigate('WelcomeScreen');
                 console.log('Kayıt başarılı');
             } else {
@@ -44,45 +38,65 @@ const SignUpPage = ({ navigation }) => {
         <View style={styles.baseStyle.container}>
             <BackButton />
 
-            <View style={styles.baseStyle.formContainer}>
-                <TextInputArea
-                    placeholder='Email'
-                    value={email}
-                    onChangeText={setEmail}
-                />
-                <TextInputArea
-                    placeholder='Password'
-                    value={password}
-                    onChangeText={setPassword}
-                />
-                <TextInputArea
-                    placeholder='Username'
-                    value={username}
-                    onChangeText={setUsername}
-                />
-                <TextInputArea
-                    placeholder='Name'
-                    value={name}
-                    onChangeText={setName}
-                />
-                <TextInputArea
-                    placeholder='Surname'
-                    value={surname}
-                    onChangeText={setSurname}
-                />
-                <TextInputArea
-                    placeholder='Phone Number'
-                    value={phoneNumber}
-                    onChangeText={setPhoneNumber}
-                />
-                <View style={{marginTop: 20}}>
-                    <BasicButton 
-                        title='Sign Up'
-                        onPress={signUp}
-                        color='gray'
-                    />
-                </View>
-            </View>
+            <Formik
+                initialValues={{
+                    email: '',
+                    password: '',
+                    username: '',
+                    name: '',
+                    surname: '',
+                    phoneNumber: ''
+                }}
+                onSubmit={signUp}
+            >
+                {({ handleSubmit, handleBlur, handleChange, values }) => (
+                    <View style={styles.baseStyle.formContainer}>
+                        <TextInputArea
+                            placeholder='Email'
+                            value={values.email}
+                            onChangeText={handleChange('email')}
+                            onBlur={handleBlur('email')}
+                        />
+                        <TextInputArea
+                            placeholder='Password'
+                            value={values.password}
+                            onChangeText={handleChange('password')}
+                            onBlur={handleBlur('password')}
+                        />
+                        <TextInputArea
+                            placeholder='Username'
+                            value={values.username}
+                            onChangeText={handleChange('username')}
+                            onBlur={handleBlur('username')}
+                        />
+                        <TextInputArea
+                            placeholder='Name'
+                            value={values.name}
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}
+                        />
+                        <TextInputArea
+                            placeholder='Surname'
+                            value={values.surname}
+                            onChangeText={handleChange('surname')}
+                            onBlur={handleBlur('surname')}
+                        />
+                        <TextInputArea
+                            placeholder='Phone Number'
+                            value={values.phoneNumber}
+                            onChangeText={handleChange('phoneNumber')}
+                            onBlur={handleBlur('phoneNumber')}
+                        />
+                        <View style={{marginTop: 20}}>
+                            <BasicButton 
+                                title='Sign Up'
+                                onPress={handleSubmit}
+                                color='gray'
+                            />
+                        </View>
+                    </View>
+                )}
+            </Formik>
         </View>
     );
 }

@@ -8,16 +8,19 @@ const WelcomePage = ({ navigation }) => {
         return(
             <View style={styles.base.TopTextContainer}>
                     <View style={styles.base.LogoAndAppNameContainer}>
-                        <Text style={styles.base.AppNameText}>Travel Buddy</Text>
+                        <Image
+                            source={require('../images/travelbuddy-logo.png')}
+                            style={styles.base.Logo}
+                        />
                     </View>
-                    <Text style={styles.base.SloganText}>A fun way to travel</Text>
+                    <Text style={styles.base.SloganText}>A Fun Way To Travel</Text>
                 </View>
         );
     }
     
     const SignUpButton = () => {
         return(
-            <View style={{marginTop:65}}>
+            <View style={{marginTop:100}}>
                 <BasicButton 
                     title='Sign Up'
                     onPress={() => navigation.navigate('SignUpScreen')}
