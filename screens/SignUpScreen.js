@@ -6,7 +6,7 @@ import BasicButton from "../components/BasicButton";
 import UserService from '../services/userService'
 import { Formik } from "formik";
 
-const SignUpPage = ({ navigation }) => {
+const SignUpScreen = ({ navigation }) => {
     const goBack = () => {
         navigation.goBack();
     }
@@ -100,4 +100,4 @@ const SignUpPage = ({ navigation }) => {
         </View>
     );
 }
-export default SignUpPage;
+export default SignUpScreen;

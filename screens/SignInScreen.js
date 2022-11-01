@@ -5,7 +5,7 @@ import TextInputArea from "../components/TextInputArea";
 import BasicButton from "../components/BasicButton";
 import { Formik } from "formik";
 
-const SignInPage = ({ navigation }) => {
+const SignInScreen = ({ navigation }) => {
     const goBack = () => {
       navigation.goBack();
     }
@@ -66,4 +66,4 @@ const SignInPage = ({ navigation }) => {
   );
 }
 
-export default SignInPage;
+export default SignInScreen;

@@ -3,7 +3,7 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from '../styles/WelcomePageStyle'
 import BasicButton from "../components/BasicButton";
 
-const WelcomePage = ({ navigation }) => {
+const WelcomeScreen = ({ navigation }) => {
     const TopTextArea = () => {
         return(
             <View style={styles.base.TopTextContainer}>
@@ -48,4 +48,4 @@ const WelcomePage = ({ navigation }) => {
     );
 }
 
-export default WelcomePage;
+export default WelcomeScreen;
