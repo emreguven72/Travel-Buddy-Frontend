@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "../styles/SignInPageStyle";
 import TextInputArea from "../components/TextInputArea";
 import BasicButton from "../components/BasicButton";
 import { Formik } from "formik";
+import { AuthContext } from "../contexts/AuthContext";
 
 const SignInScreen = ({ navigation }) => {
+  const {login, logout} = useContext(AuthContext);
+
     const goBack = () => {
       navigation.goBack();
     }
@@ -41,7 +44,7 @@ const SignInScreen = ({ navigation }) => {
       </TouchableOpacity>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={logIn}
+        onSubmit={login}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.base.FormArea} >
@@ -60,8 +63,8 @@ const SignInScreen = ({ navigation }) => {
             <LogInButton onPress={handleSubmit}/>
           </View>
         )}
-        
       </Formik>
+
     </View>
   );
 }
