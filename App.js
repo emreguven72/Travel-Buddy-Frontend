@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { SafeAreaView, StyleSheet, StatusBar } from "react-native";
-import StackNavigator from "./components/StackNavigator";
-import { AuthContext, AuthProvider } from "./contexts/AuthContext";
-import AppNav from "./navigation/AppNav";
-import TestScreen from "./screens/TestScreen";
+import { AuthProvider } from "./contexts/AuthContext";
+import AppNav from "./navigations/AppNav";
 
 const App = () => {
 
