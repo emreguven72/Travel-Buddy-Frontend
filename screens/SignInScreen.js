@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import styles from "../styles/SignInPageStyle";
 import TextInputArea from "../components/TextInputArea";
@@ -13,18 +13,6 @@ const SignInScreen = ({ navigation }) => {
       navigation.goBack();
     }
 
-    const logIn = (formValues) => {
-      if(formValues.email!=''&&formValues.password!='') {
-        if(true /* bilgiler doğruysa */) {
-          console.log('Giriş yapıldı');
-        } else {
-          console.log('E-posta veya şifre yanlış')
-        }
-      }else {
-        console.log('Eksik bilgi girişi');
-      }
-    }
-
     const LogInButton = ({ onPress }) => {
       return(
         <View style={{marginTop:30}}>
@@ -37,6 +25,10 @@ const SignInScreen = ({ navigation }) => {
       );
     }
 
+    const logIn = (formValues) => {
+      login(formValues.email, formValues.password);
+    }
+
   return (
     <View style={styles.light.container}>
       <TouchableOpacity onPress={goBack} style={{marginTop: 10, marginLeft: 10}} >
@@ -44,7 +36,7 @@ const SignInScreen = ({ navigation }) => {
       </TouchableOpacity>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={login}
+        onSubmit={logIn}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
           <View style={styles.base.FormArea} >
