@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image, TouchableOpacity, Touchable } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from '../styles/WelcomePageStyle'
 import BasicButton from "../components/BasicButton";
 

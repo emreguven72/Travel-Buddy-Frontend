@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Text, SafeAreaView, TextInput, StatusBar, View, TouchableOpacity } from "react-native";
+import React from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 import styles from "../styles/SignInPageStyle";
 import TextInputArea from "../components/TextInputArea";
 import BasicButton from "../components/BasicButton";

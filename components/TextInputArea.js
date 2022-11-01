@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Text } from "react-native";
+import { TextInput, StyleSheet } from "react-native";
 
 const TextInputArea = ({ value, onChangeText, placeholder, onBlur }) => {
   return (

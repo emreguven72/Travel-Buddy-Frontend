@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from '../styles/SignUpPageStyle';
 import { View, TouchableOpacity, TextInput, Text } from "react-native";
 import TextInputArea from "../components/TextInputArea";
