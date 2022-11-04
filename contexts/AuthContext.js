@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useMemo } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserService from "../services/userService";
 
@@ -14,13 +14,12 @@ export const AuthProvider = ({ children }) => {
         let user = await userService.getByEmail(email);
         setIsLoading(true);
         if(user.password === password) {
-            setUserInfo(JSON.stringify(user))
+            setUserInfo(user);
             setUserToken(user.token);
-            await AsyncStorage.setItem('userToken', 'asdas'); //user.token yerine userToken gelmeli fakat hatali calisiyor
+            await AsyncStorage.setItem('userToken', user.token); //bug var setUserToken 'lk refreshde calismiyor.
             console.log(userToken);
             await AsyncStorage.setItem('userInfo', JSON.stringify(user))
         }
-        console.log(await AsyncStorage.getItem('userToken'));
         setIsLoading(false);
     }
 
@@ -52,10 +51,10 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
       isLoggedIn();
-      console.log(userInfo)
+      console.log('userInfo : ', userInfo);
+      console.log('userToken : ', userToken);
     }, [])
     
-
     return(
         <AuthContext.Provider value={{login, logout, isLoading, userToken, userInfo}}>
             {children}

@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import { AuthContext } from "../contexts/AuthContext";
 
 const SignInScreen = ({ navigation }) => {
-  const {login, logout} = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
 
     const goBack = () => {
       navigation.goBack();
