@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, {useContext, useState, useEffect} from "react";
+import React, {useContext, useState, useEffect, useMemo} from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import BasicButton from "../components/BasicButton";
 import TextInputArea from "../components/TextInputArea";
@@ -8,8 +8,7 @@ import Styles from '../styles/TravelsScreenStyle'
 import TravelService from "../services/TravelService";
 
 const TravelsScreen = () => {
-    const {userInfo} = useContext(AuthContext);
-
+    const {userInfo,logout} = useContext(AuthContext);
     const [travels, setTravels] = useState([]);
 
     const TravelCard = ({ startLocation, destination }) => {
@@ -22,8 +21,8 @@ const TravelsScreen = () => {
 
     const getAllTravels = async() => {
         let travelService = new TravelService();
-        let travels2 = await travelService.getAllTravels()
-        console.log(travels2);
+        setTravels(await travelService.getAllTravels())
+        console.log('calisti');
     }
 
     const createTravel = async(formValues) => {
@@ -35,19 +34,18 @@ const TravelsScreen = () => {
 
     useEffect(() => {
         getAllTravels();
-    }, [])
+    }, [travels]) //infinite loop
     
 
     return(
         <View style={Styles.baseStyle.container}>
-            <TravelCard 
-                startLocation='Adana'
-                destination='Mersin'
-            />
-            <TravelCard 
-                startLocation='Istanbul'
-                destination='Ankara'
-            />
+            {travels.map((travel) => (
+                <TravelCard
+                    key={travel.id}
+                    startLocation={travel.startLocation}
+                    destination={travel.endLocation}
+                />
+            ))}
             <Formik
                 initialValues={{
                     startLocation: '',
@@ -71,14 +69,18 @@ const TravelsScreen = () => {
                             onBlur={handleBlur('endLocation')}
                         />
                         <BasicButton
-                            title='Log Out'
-                            color='red'
+                            title='Add Travel'
+                            color='yellow'
                             onPress={handleSubmit}
                         />
                     </View>
-
                 )}
             </Formik>
+            <BasicButton
+                title='Log Out'
+                color='red'
+                onPress={logout}
+            />
         </View>
     );
 }

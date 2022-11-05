@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+//Desktop ip address: 192.168.0.113
+
 export default class UserService {
     async getAllUsers() {
         try {
-            return await axios.get('http://192.168.0.111:8080/api/users/getAll');
+            return await axios.get('http://192.168.0.113:8080/api/users/getAll');
         } catch(e) {
             console.log('deleteUser request error');
         }
@@ -11,7 +13,7 @@ export default class UserService {
 
     async createUser(email,password,username,name,surname,phoneNumber) {
         try {
-            return await axios.post('http://192.168.0.111:8080/api/users/add',{
+            return await axios.post('http://192.168.0.113:8080/api/users/add',{
                 email: email,
                 username: username,
                 password: password,
@@ -26,7 +28,7 @@ export default class UserService {
 
     async deleteUser(id) {
         try {
-            return await axios.delete(`http://192.168.0.111:8080/api/users/delete?id=${id}`)
+            return await axios.delete(`http://192.168.0.113:8080/api/users/delete?id=${id}`)
             .then(() => console.log("User Deleted successfully")).catch(() => console.log("User could not deleted"));
         } catch(e) {
             console.log('deleteUser request error');
@@ -35,7 +37,7 @@ export default class UserService {
 
     async getById(id) {
         try{
-            const response = await axios.get(`http://192.168.0.111:8080/api/users/getById?id=${id}`);
+            const response = await axios.get(`http://192.168.0.113:8080/api/users/getById?id=${id}`);
             return response.data;
         } catch(e) {
             console.log('getById request error', {e});
@@ -44,7 +46,7 @@ export default class UserService {
 
     async getByEmail(email) {
         try{
-            const response = await axios.get(`http://192.168.0.111:8080/api/users/getByEmail?email=${email}`);
+            const response = await axios.get(`http://192.168.0.113:8080/api/users/getByEmail?email=${email}`);
             return response.data;
         } catch(e) {
             console.log('getByEmail request error');
