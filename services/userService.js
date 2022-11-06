@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "react-native-axios";
 
 //Desktop ip address: 192.168.0.113
 

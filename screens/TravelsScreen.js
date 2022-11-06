@@ -34,7 +34,7 @@ const TravelsScreen = () => {
 
     useEffect(() => {
         getAllTravels();
-    }, [travels]) //infinite loop
+    }, []) //infinite loop if putting travels in array
     
 
     return(

@@ -1,5 +1,7 @@
-import axios from "axios";
+import axios from "react-native-axios";
 import UserService from "./userService";
+
+//Desktop ip address: 192.168.0.113
 
 export default class TravelService {
     async getAllTravels() {
