@@ -5,11 +5,13 @@ import BasicButton from "../components/BasicButton";
 import TextInputArea from "../components/TextInputArea";
 import { AuthContext } from "../contexts/AuthContext";
 import Styles from '../styles/TravelsScreenStyle'
-import TravelService from "../services/TravelService";
+import useTravelStore from "../contexts/TravelStore";
 
 const TravelsScreen = () => {
     const {userInfo,logout} = useContext(AuthContext);
-    const [travels, setTravels] = useState([]);
+    const travels = useTravelStore((state) => state.travels);
+    const getTravels = useTravelStore((state) => state.fetch);
+    const addTravel = useTravelStore((state) => state.addTravel);
 
     const TravelCard = ({ startLocation, destination }) => {
         return(
@@ -19,33 +21,26 @@ const TravelsScreen = () => {
         );
     }
 
-    const getAllTravels = async() => {
-        let travelService = new TravelService();
-        setTravels(await travelService.getAllTravels())
-        console.log('calisti');
-    }
-
-    const createTravel = async(formValues) => {
+    const createTravel = (formValues) => {
         if(formValues.startLocation!=''&&formValues.endLocation!='') {
-            let travelService = new TravelService();
-            await travelService.createTravel(formValues.startLocation,formValues.endLocation,formValues.user);
+            addTravel(formValues.startLocation,formValues.endLocation,formValues.user);
         }
     }
 
     useEffect(() => {
-        getAllTravels();
-    }, []) //infinite loop if putting travels in array
+        getTravels();
+    }, []) 
     
 
     return(
         <View style={Styles.baseStyle.container}>
-            {travels.map((travel) => (
+            {travels ? travels.map((travel) => (
                 <TravelCard
                     key={travel.id}
                     startLocation={travel.startLocation}
                     destination={travel.endLocation}
                 />
-            ))}
+            )) : <View></View>}
             <Formik
                 initialValues={{
                     startLocation: '',
