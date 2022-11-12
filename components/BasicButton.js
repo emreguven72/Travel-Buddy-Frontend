@@ -4,13 +4,13 @@ import { Text, TouchableOpacity, StyleSheet } from "react-native";
 const BasicButton = ({ onPress, color, title }) => {
     return(
         <TouchableOpacity onPress={onPress} style={styles({color}).SignUpButton} activeOpacity={0.8}>
-                <Text >{title}</Text>
+                <Text style={styles({color}).SignUpButtonText}>{title}</Text>
         </TouchableOpacity>
     );
 }
 export default BasicButton;
 
-const styles = ({ color, title }) => {
+const styles = ({ color }) => {
     return(
         StyleSheet.create({
             SignUpButton: {
@@ -21,11 +21,13 @@ const styles = ({ color, title }) => {
                 width: 300,
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 10,
+                borderRadius: 5,
+                borderWidth: 1,
+                borderColor: '#53D8A9'
             },
             SignUpButtonText: {
-                fontSize: 16,
-                color: 'white'
+                fontSize: 14,
+                color: 'black'
             }
         })
     );

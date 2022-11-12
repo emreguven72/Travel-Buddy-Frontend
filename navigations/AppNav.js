@@ -1,12 +1,18 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import AppStack from "./AppStack";
-import { AuthContext } from "../contexts/AuthContext";
 import { View, ActivityIndicator, Text } from "react-native";
 import AuthStack from "./AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
+import useAuthStore from "../contexts/AuthStore";
 
 const AppNav = () => {
-  const { isLoading, userToken } = useContext(AuthContext);
+  const authToken = useAuthStore((state) => state.authToken)
+  const isLoading = useAuthStore((state) => state.isLoading)
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+
+  useEffect(() => {
+    isLoggedIn()
+  },[])
 
   if (isLoading) {
     return (
@@ -18,7 +24,7 @@ const AppNav = () => {
 
   return (
     <NavigationContainer>
-      {userToken !== null ? <AppStack /> : <AuthStack />}
+      {authToken !== null ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

@@ -1,17 +1,20 @@
 import { Formik } from "formik";
-import React, {useContext, useState, useEffect, useMemo} from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import BasicButton from "../components/BasicButton";
 import TextInputArea from "../components/TextInputArea";
-import { AuthContext } from "../contexts/AuthContext";
 import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
+import useAuthStore from "../contexts/AuthStore";
+import shallow from 'zustand/shallow';
 
 const TravelsScreen = () => {
-    const {userInfo,logout} = useContext(AuthContext);
-    const travels = useTravelStore((state) => state.travels);
+    const authInfo = useAuthStore((state) => state.authInfo)
+    const logout = useAuthStore((state) => state.logout)
+    const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
     const addTravel = useTravelStore((state) => state.addTravel);
+    const [counter, setCounter] = useState(0);
 
     const TravelCard = ({ startLocation, destination }) => {
         return(
@@ -24,12 +27,17 @@ const TravelsScreen = () => {
     const createTravel = (formValues) => {
         if(formValues.startLocation!=''&&formValues.endLocation!='') {
             addTravel(formValues.startLocation,formValues.endLocation,formValues.user);
+            getTravels();
         }
     }
 
     useEffect(() => {
         getTravels();
-    }, []) 
+        setTimeout(() => {
+            setCounter(counter+1);
+        },60000)
+        console.log('worked');
+    }, [counter]) 
     
 
     return(
@@ -45,7 +53,7 @@ const TravelsScreen = () => {
                 initialValues={{
                     startLocation: '',
                     endLocation: '',
-                    user: userInfo
+                    user: authInfo
                 }}
                 onSubmit={createTravel}
             >

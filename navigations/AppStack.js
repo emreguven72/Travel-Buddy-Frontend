@@ -1,5 +1,4 @@
 import React from "react";
-import TestScreen from "../screens/TravelsScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TravelsScreen from "../screens/TravelsScreen";
 

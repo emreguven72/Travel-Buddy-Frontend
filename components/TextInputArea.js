@@ -18,11 +18,11 @@ export default TextInputArea;
 const style = StyleSheet.create({
   textInputArea: {
     fontSize: 18,
-    borderRadius: 10,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: '#CCC',
-    height: 40,
-    width: 250,
+    height: 45,
+    width: 300,
     marginTop: 15,
     paddingHorizontal: 6
   },
