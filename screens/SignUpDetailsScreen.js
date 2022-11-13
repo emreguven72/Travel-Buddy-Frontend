@@ -78,6 +78,7 @@ const SignUpDetailsScreen = ({ route,navigation }) => {
                             value={values.password}
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
+                            isSecure={true}
                         />
                         <TextInputArea
                             placeholder='Username'

@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import BasicButton from "../components/BasicButton";
 import TextInputArea from "../components/TextInputArea";
@@ -14,12 +14,11 @@ const TravelsScreen = () => {
     const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
     const addTravel = useTravelStore((state) => state.addTravel);
-    const [counter, setCounter] = useState(0);
 
-    const TravelCard = ({ startLocation, destination }) => {
+    const TravelCard2 = ({ startLocation, destination, userInfo }) => {
         return(
             <TouchableOpacity style={Styles.baseStyle.travelCardContainer} activeOpacity={0.8}>
-                <Text style={Styles.baseStyle.travelCardLocationText}>{startLocation} --- {destination}</Text>
+                <Text style={Styles.baseStyle.travelCardLocationText}>{userInfo.username}</Text>
             </TouchableOpacity>
         );
     }
@@ -30,24 +29,32 @@ const TravelsScreen = () => {
             getTravels();
         }
     }
+    
+    const TravelCard = ({ startLocation, destionation, userInfo }) => {
+        return(
+            <View>
+
+            </View>
+        )
+    }
 
     useEffect(() => {
-        getTravels();
-        setTimeout(() => {
-            setCounter(counter+1);
-        },60000)
-        console.log('worked');
-    }, [counter]) 
+        //TODO: SWR kutuphanesine bak ve veri guncellemesinde refresh icin kullan.
+        //NOTE: veri degisiminde istek atma yontemi yok interval ile birkac dakikada veya saniyede bir cagiracaksin mecburen. yani swr kullanmana gerek yok ama bir arastir.
+        getTravels()
+        const interval = setInterval(() => {
+            getTravels()
+        },10000)
+        return () => {
+            clearInterval(interval)
+        }
+    }, []) 
     
 
     return(
         <View style={Styles.baseStyle.container}>
             {travels ? travels.map((travel) => (
-                <TravelCard
-                    key={travel.id}
-                    startLocation={travel.startLocation}
-                    destination={travel.endLocation}
-                />
+                <View key={travel.id}></View>
             )) : <View></View>}
             <Formik
                 initialValues={{

@@ -13,6 +13,10 @@ const SignInScreen = ({ navigation }) => {
       navigation.goBack();
     }
 
+    const logIn = (formValues) => {
+      login(formValues.email, formValues.password);
+    }
+
     const TopNav = () => {
       return(
           <View style={{flexDirection: 'row', alignContent: 'center', marginTop: 20}}>
@@ -89,15 +93,11 @@ const GoogleButton = () => {
       );
     }
 
-    const logIn = (formValues) => {
-      login(formValues.email, formValues.password);
-    }
-
   return (
     <View style={styles.light.container}>
       <TopNav />
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: 'emreguven_72@hotmail.com', password: '122' }}
         onSubmit={logIn}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -113,6 +113,7 @@ const GoogleButton = () => {
                 value={values.password}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
+                isSecure={true}
             />
             <LogInButton onPress={handleSubmit}/>
           </View>

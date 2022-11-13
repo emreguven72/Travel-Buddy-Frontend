@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput, StyleSheet } from "react-native";
 
-const TextInputArea = ({ value, onChangeText, placeholder, onBlur }) => {
+const TextInputArea = ({ value, onChangeText, placeholder, onBlur, isSecure=false }) => {
   return (
     <TextInput
       style={style.textInputArea}
@@ -9,6 +9,7 @@ const TextInputArea = ({ value, onChangeText, placeholder, onBlur }) => {
       onChangeText={onChangeText}
       placeholder={placeholder}
       onBlur={onBlur}
+      secureTextEntry={isSecure}
     />
   );
 }
