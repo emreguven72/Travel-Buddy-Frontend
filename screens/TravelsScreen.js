@@ -1,39 +1,85 @@
-import { Formik } from "formik";
 import React, { useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import BasicButton from "../components/BasicButton";
-import TextInputArea from "../components/TextInputArea";
+import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
-import useAuthStore from "../contexts/AuthStore";
 import shallow from 'zustand/shallow';
 
-const TravelsScreen = () => {
-    const authInfo = useAuthStore((state) => state.authInfo)
-    const logout = useAuthStore((state) => state.logout)
+const TravelsScreen = ({ navigation }) => {
     const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
     const addTravel = useTravelStore((state) => state.addTravel);
 
-    const TravelCard2 = ({ startLocation, destination, userInfo }) => {
-        return(
-            <TouchableOpacity style={Styles.baseStyle.travelCardContainer} activeOpacity={0.8}>
-                <Text style={Styles.baseStyle.travelCardLocationText}>{userInfo.username}</Text>
-            </TouchableOpacity>
-        );
-    }
-
+    //TODO: add this method to the addTravelScreen when you create it.
     const createTravel = (formValues) => {
         if(formValues.startLocation!=''&&formValues.endLocation!='') {
             addTravel(formValues.startLocation,formValues.endLocation,formValues.user);
             getTravels();
         }
     }
-    
-    const TravelCard = ({ startLocation, destionation, userInfo }) => {
-        return(
-            <View>
 
+    const TopNav = () => {
+        return(
+            <View style={Styles.baseStyle.topNavContainer}>
+                <View style={Styles.baseStyle.logoContainer}> 
+                    <Image 
+                        source={require('../images/travelbuddy-logo.png')}
+                        style={{
+                            height: 40,
+                            width: 180,
+                            resizeMode: 'contain'
+                        }}
+                    />
+                </View>
+                <View>
+                    <TouchableOpacity onPress={null} style={Styles.baseStyle.addTravelButtonContainer} hitSlop={{left: 30, right: 30, bottom: 20, top: 30}}>
+                        <Image 
+                        source={require('../images/addIcon.png')}
+                        style={{
+                            backgroundColor: '#53D8A9',
+                            height: 30,
+                            width: 30
+                        }}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
+    
+    const TravelCard = ({ startLocation, endLocation, userName }) => {
+        return(
+            <TouchableOpacity style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
+                <View style={Styles.baseStyle.travelCardTravelImage}>
+                    <Text>Picture About Travel</Text>
+                </View>
+                <View style={Styles.baseStyle.travelCardUserInfoContainer}>
+                    <View style={Styles.baseStyle.travelCardUserImage}>
+                        <Image 
+                            source={null}
+                            style={null}
+                            //TODO: add source and style for the pic and fetch it from db
+                        />
+                    </View>
+                    <Text style={Styles.baseStyle.travelCardUserNameText}>{userName}</Text>
+                </View>
+                <View style={Styles.baseStyle.travelCardLocationsContainer}>
+                    <Text style={Styles.baseStyle.travelCardLocationsTexts}>{startLocation} ------{'>'} {endLocation}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+    const Travels = () => {
+        return(
+            <View style={Styles.baseStyle.travelCardsContainer}>
+                {travels ? travels.map((travel) => (
+                    <TravelCard 
+                        key={travel.id}
+                        startLocation={travel.startLocation}
+                        endLocation={travel.endLocation}
+                        userInfo={travel.user}
+                    />
+                )) : <View></View>}
             </View>
         )
     }
@@ -53,44 +99,26 @@ const TravelsScreen = () => {
 
     return(
         <View style={Styles.baseStyle.container}>
-            {travels ? travels.map((travel) => (
-                <View key={travel.id}></View>
-            )) : <View></View>}
-            <Formik
-                initialValues={{
-                    startLocation: '',
-                    endLocation: '',
-                    user: authInfo
-                }}
-                onSubmit={createTravel}
-            >
-                {({ handleSubmit, handleBlur, handleChange, values }) => (
-                    <View>
-                        <TextInputArea 
-                            placeholder='Start Location'
-                            value={values.startLocation}
-                            onChangeText={handleChange('startLocation')}
-                            onBlur={handleBlur('startLocation')}
-                        />
-                        <TextInputArea
-                            placeholder='End Location'
-                            value={values.endLocation}
-                            onChangeText={handleChange('endLocation')}
-                            onBlur={handleBlur('endLocation')}
-                        />
-                        <BasicButton
-                            title='Add Travel'
-                            color='yellow'
-                            onPress={handleSubmit}
-                        />
-                    </View>
-                )}
-            </Formik>
-            <BasicButton
-                title='Log Out'
-                color='red'
-                onPress={logout}
-            />
+            <View style={Styles.baseStyle.topNavContainer}>
+                <TopNav />
+            </View>
+            {
+                travels ? 
+                <View style={Styles.baseStyle.travelCardsContainer}>
+                    <FlatList
+                        data={travels.reverse()}
+                        renderItem={({item}) => (
+                            <TravelCard
+                                key={item.user.id}
+                                startLocation={item.startLocation}
+                                endLocation={item.endLocation}
+                                userName={item.user.username}
+                            />
+                        )}
+                    />
+                </View>
+                : <View></View>
+            }
         </View>
     );
 }
