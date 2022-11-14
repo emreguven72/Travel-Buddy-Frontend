@@ -7,7 +7,7 @@ const App = () => {
     <SafeAreaView style={style.container}>
         <AppNav />
         
-        <StatusBar backgroundColor="#FFF" barStyle="dark-content" />
+        <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

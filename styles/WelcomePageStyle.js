@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const baseStyle = StyleSheet.create({
     MainContainer: {
         flex: 1,
-        backgroundColor: '#FFF'
+        backgroundColor: '#FFFFFF'
     },
     TopTextContainer: {
         flexDirection: 'column',

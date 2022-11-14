@@ -1,6 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TravelsScreen from "../screens/TravelsScreen";
+import AddTravelScreen from "../screens/AddTravelScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -11,8 +13,12 @@ const AppStack = () => {
                 initialRouteName="TravelsScreen"
             >
                 <Stack.Screen 
-                    name="TestScreen" 
+                    name="TravelsScreen" 
                     component={TravelsScreen}
+                />
+                <Stack.Screen 
+                    name="AddTravelScreen"
+                    component={AddTravelScreen}
                 />
             </Stack.Navigator>
     );

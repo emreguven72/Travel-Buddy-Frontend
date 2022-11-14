@@ -3,18 +3,15 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
 import shallow from 'zustand/shallow';
+import useAuthStore from "../contexts/AuthStore";
 
 const TravelsScreen = ({ navigation }) => {
     const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
-    const addTravel = useTravelStore((state) => state.addTravel);
+    const logout = useAuthStore((state) => state.logout)
 
-    //TODO: add this method to the addTravelScreen when you create it.
-    const createTravel = (formValues) => {
-        if(formValues.startLocation!=''&&formValues.endLocation!='') {
-            addTravel(formValues.startLocation,formValues.endLocation,formValues.user);
-            getTravels();
-        }
+    const goAddTravelScreen = () => {
+        navigation.navigate('AddTravelScreen')
     }
 
     const TopNav = () => {
@@ -31,7 +28,7 @@ const TravelsScreen = ({ navigation }) => {
                     />
                 </View>
                 <View>
-                    <TouchableOpacity onPress={null} style={Styles.baseStyle.addTravelButtonContainer} hitSlop={{left: 30, right: 30, bottom: 20, top: 30}}>
+                    <TouchableOpacity onPress={goAddTravelScreen} style={Styles.baseStyle.addTravelButtonContainer} hitSlop={{left: 30, right: 30, bottom: 20, top: 30}}>
                         <Image 
                         source={require('../images/addIcon.png')}
                         style={{
@@ -85,8 +82,6 @@ const TravelsScreen = ({ navigation }) => {
     }
 
     useEffect(() => {
-        //TODO: SWR kutuphanesine bak ve veri guncellemesinde refresh icin kullan.
-        //NOTE: veri degisiminde istek atma yontemi yok interval ile birkac dakikada veya saniyede bir cagiracaksin mecburen. yani swr kullanmana gerek yok ama bir arastir.
         getTravels()
         const interval = setInterval(() => {
             getTravels()

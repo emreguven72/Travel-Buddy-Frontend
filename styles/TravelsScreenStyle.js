@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const baseStyle = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
     },
     topNavContainer: {
         flexDirection: 'row',
@@ -34,7 +34,8 @@ const baseStyle = StyleSheet.create({
         borderColor: '#53D8A9',
         marginTop: 10,
         marginLeft: 'auto',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        backgroundColor: '#E1FFEE'
     },
     travelCardTravelImage: {
         width: '100%',
@@ -59,8 +60,8 @@ const baseStyle = StyleSheet.create({
         marginLeft: 25
     },
     travelCardUserNameText: {
-        fontSize: 24,
-        marginLeft: 20,
+        fontSize: 20,
+        marginLeft: 30,
         color: '#53D8A9'
     },
     travelCardLocationsContainer: {
