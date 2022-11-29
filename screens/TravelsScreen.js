@@ -44,7 +44,7 @@ const TravelsScreen = ({ navigation }) => {
             </View>
         );
     }
-    
+
     const TravelCard = ({ startLocation, endLocation, userName }) => {
         return(
             <TouchableOpacity style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
@@ -54,7 +54,7 @@ const TravelsScreen = ({ navigation }) => {
                 <View style={Styles.baseStyle.travelCardUserInfoContainer}>
                     <View style={Styles.baseStyle.travelCardUserImage}>
                         <Image 
-                            source={require(`../images/default.png`)}
+                            source={require("../images/default.png")}
                             style={Styles.baseStyle.userImage}
                             //TODO: add source and style for the pic and fetch it from db
                         />

@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TravelsScreen from "../screens/TravelsScreen";
 import AddTravelScreen from "../screens/AddTravelScreen";
-
+import MainTabNav from "./MainTabNav";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +14,7 @@ const AppStack = () => {
             >
                 <Stack.Screen 
                     name="TravelsScreen" 
-                    component={TravelsScreen}
+                    component={MainTabNav}
                 />
                 <Stack.Screen 
                     name="AddTravelScreen"

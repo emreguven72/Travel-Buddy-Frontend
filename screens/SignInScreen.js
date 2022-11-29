@@ -97,7 +97,7 @@ const GoogleButton = () => {
     <View style={styles.light.container}>
       <TopNav />
       <Formik
-        initialValues={{ email: 'emreguven_72@hotmail.com', password: '122' }}
+        initialValues={{ email: 'emreguven_72@hotmail.com', password: '123' }}
         onSubmit={logIn}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
