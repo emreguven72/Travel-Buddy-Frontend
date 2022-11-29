@@ -57,7 +57,9 @@ const baseStyle = StyleSheet.create({
         borderRadius: 100,
         borderWidth: 1,
         borderColor: '#53D8A9',
-        marginLeft: 25
+        marginLeft: 25,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     travelCardUserNameText: {
         fontSize: 20,
@@ -73,6 +75,11 @@ const baseStyle = StyleSheet.create({
         fontSize: 24,
         color: '#53D8A9',
     },
+    userImage: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 100,
+    }
 })
 
 export default {

@@ -7,7 +7,7 @@ const useAuthStore = create((set) => ({
     authToken: null,
     authInfo: null,
     login: async(email,password) => {
-        const response = await axios.get(`http://192.168.0.15:8080/api/users/getByEmail?email=${email}`);
+        const response = await axios.get(`http://192.168.1.248:8080/api/users/getByEmail?email=${email}`);
         set({ isLoading: true });
         if(response.data.password === password){
             set({ authInfo: await response.data });

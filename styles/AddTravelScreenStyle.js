@@ -35,7 +35,7 @@ const baseStyle = StyleSheet.create({
         marginRight: 'auto',
         marginTop: 70,
         alignItems: 'center'
-    }
+    },
 })
 
 export default {

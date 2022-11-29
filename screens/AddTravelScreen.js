@@ -19,7 +19,7 @@ const AddTravelScreen = ({ navigation }) => {
     //TODO: send also description and carDetails to addTravel function
     const createTravel = (formValues) => {
         if(formValues.startLocation!=''&&formValues.endLocation!=''&&formValues.description!=''&&formValues.carDetails!='') {
-            addTravel(formValues.startLocation,formValues.endLocation,authInfo);
+            addTravel(formValues.startLocation,formValues.endLocation,authInfo,formValues.description,formValues.carDetails);
             getTravels();
             goBack();
         }

@@ -4,11 +4,13 @@ import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
 import shallow from 'zustand/shallow';
 import useAuthStore from "../contexts/AuthStore";
+import { setNestedObjectValues } from "formik";
 
 const TravelsScreen = ({ navigation }) => {
     const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
     const logout = useAuthStore((state) => state.logout)
+    const authInfo = useAuthStore((state) => state.authInfo)
 
     const goAddTravelScreen = () => {
         navigation.navigate('AddTravelScreen')
@@ -52,8 +54,8 @@ const TravelsScreen = ({ navigation }) => {
                 <View style={Styles.baseStyle.travelCardUserInfoContainer}>
                     <View style={Styles.baseStyle.travelCardUserImage}>
                         <Image 
-                            source={null}
-                            style={null}
+                            source={require(`../images/default.png`)}
+                            style={Styles.baseStyle.userImage}
                             //TODO: add source and style for the pic and fetch it from db
                         />
                     </View>
