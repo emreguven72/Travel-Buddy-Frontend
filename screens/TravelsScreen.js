@@ -3,17 +3,25 @@ import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
 import shallow from 'zustand/shallow';
-import useAuthStore from "../contexts/AuthStore";
-import { setNestedObjectValues } from "formik";
 
 const TravelsScreen = ({ navigation }) => {
     const travels = useTravelStore((state) => state.travels, shallow);
     const getTravels = useTravelStore((state) => state.fetch);
-    const logout = useAuthStore((state) => state.logout)
-    const authInfo = useAuthStore((state) => state.authInfo)
 
     const goAddTravelScreen = () => {
         navigation.navigate('AddTravelScreen')
+    }
+
+    const goTravelDetails = (startLocation,endLocation,userName,userImage,description,carDetails,userId) => {
+        navigation.navigate('TravelDetailsScreen', {
+            userImage: userImage,
+            startLocation: startLocation,
+            endLocation: endLocation,
+            description: description,
+            carDetails: carDetails,
+            username: userName,
+            userId: userId
+        })
     }
 
     const TopNav = () => {
@@ -45,18 +53,17 @@ const TravelsScreen = ({ navigation }) => {
         );
     }
 
-    const TravelCard = ({ startLocation, endLocation, userName }) => {
+    const TravelCard = ({ startLocation, endLocation, userName, userImage, description, carDetails, userId }) => {
         return(
-            <TouchableOpacity style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
+            <TouchableOpacity onPress={() => goTravelDetails(startLocation,endLocation,userName,userImage,description,carDetails,userId)} style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
                 <View style={Styles.baseStyle.travelCardTravelImage}>
                     <Text>Picture About Travel</Text>
                 </View>
                 <View style={Styles.baseStyle.travelCardUserInfoContainer}>
                     <View style={Styles.baseStyle.travelCardUserImage}>
                         <Image 
-                            source={require("../images/default.png")}
+                            source={require('../images/default.png')}
                             style={Styles.baseStyle.userImage}
-                            //TODO: add source and style for the pic and fetch it from db
                         />
                     </View>
                     <Text style={Styles.baseStyle.travelCardUserNameText}>{userName}</Text>
@@ -65,21 +72,6 @@ const TravelsScreen = ({ navigation }) => {
                     <Text style={Styles.baseStyle.travelCardLocationsTexts}>{startLocation} ------{'>'} {endLocation}</Text>
                 </View>
             </TouchableOpacity>
-        )
-    }
-
-    const Travels = () => {
-        return(
-            <View style={Styles.baseStyle.travelCardsContainer}>
-                {travels ? travels.map((travel) => (
-                    <TravelCard 
-                        key={travel.id}
-                        startLocation={travel.startLocation}
-                        endLocation={travel.endLocation}
-                        userInfo={travel.user}
-                    />
-                )) : <View></View>}
-            </View>
         )
     }
 
@@ -110,6 +102,10 @@ const TravelsScreen = ({ navigation }) => {
                                 startLocation={item.startLocation}
                                 endLocation={item.endLocation}
                                 userName={item.user.username}
+                                userImage={item.user.image}
+                                description={item.description}
+                                carDetails={item.carDetails}
+                                userId={item.user.id}
                             />
                         )}
                     />
