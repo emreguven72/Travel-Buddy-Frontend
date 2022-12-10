@@ -3,11 +3,12 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TravelsScreen from '../screens/TravelsScreen';
 import useAuthStore from '../contexts/AuthStore';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const MainTabNav = () => {
     const logout = useAuthStore((state) => state.logout)
 
-    function SettingsScreen() {
+    function SettingsScreen2() {
         return (
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>Profile!</Text>
@@ -35,9 +36,9 @@ const MainTabNav = () => {
                             }}
                         />
                     }
-                    if(route.name === 'Profile') {
+                    if(route.name === 'Settings') {
                         return <Image 
-                            source={require('../images/addIcon.png')}
+                            source={require('../images/settingsLogo.png')}
                             style={{
                                 width: size,
                                 height: size
@@ -51,7 +52,7 @@ const MainTabNav = () => {
             })}
         >
             <Tab.Screen options={{headerShown:false}} name="MainTabs" component={TravelsScreen} />
-            <Tab.Screen options={{headerShown:false}} name="Profile" component={SettingsScreen} />
+            <Tab.Screen options={{headerShown:false}} name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     )
 }
