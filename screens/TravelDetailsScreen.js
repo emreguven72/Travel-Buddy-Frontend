@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { Text, Image, View, TouchableOpacity } from "react-native";
+import { Text, Image, View, TouchableOpacity, ScrollView } from "react-native";
 import useTravelStore from "../contexts/TravelStore";
 import Styles from '../styles/TravelDetailsScreenStyle'
 import BasicButton from '../components/BasicButton'
+import Map from "../components/Map";
 
 const TravelDetailsScreen = ({ navigation, route }) => {
 
@@ -33,14 +34,14 @@ const TravelDetailsScreen = ({ navigation, route }) => {
                     <Text style={Styles.baseStyle.usernameText}>{username}</Text>
                 </View>
             </View>
-            <View style={Styles.baseStyle.travelDetailsSectionContainer}>
+            <ScrollView style={Styles.baseStyle.travelDetailsSectionContainer}>
                 <Text style={Styles.baseStyle.locationTexts}>{startLocation} {"--->"} {endLocation}</Text>
                 <Text style={Styles.baseStyle.descriptionText}>{description}</Text>
                 <Text style={Styles.baseStyle.carDetailsText}>{carDetails}</Text>
-            </View>
+            </ScrollView>
             <View style={Styles.baseStyle.mapSection}>
                 <View style={Styles.baseStyle.map}>
-                    <Text style={{fontSize: 24, alignSelf: 'center',marginTop: 'auto',marginBottom: 'auto'}}>Map Component</Text>
+                    <Map />
                 </View> 
 
                 <View style={Styles.baseStyle.joinTravelButtonContainer}>

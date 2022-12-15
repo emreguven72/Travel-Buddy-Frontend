@@ -43,6 +43,7 @@ const baseStyle = StyleSheet.create({
     travelDetailsSectionContainer: {
         width: '100%',
         height: '35%',
+        backgroundColor: '#e1e6ed',
     },
     locationTexts: {
         fontSize: 24,
@@ -67,7 +68,7 @@ const baseStyle = StyleSheet.create({
         width: '100%',
         height: '30%',
         position: "relative",
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
     },
     map: {
         width: '100%',
