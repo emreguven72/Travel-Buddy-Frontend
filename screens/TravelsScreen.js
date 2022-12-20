@@ -1,12 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import Styles from '../styles/TravelsScreenStyle'
 import useTravelStore from "../contexts/TravelStore";
 import shallow from 'zustand/shallow';
+import SelectDropdown from "react-native-select-dropdown";
 
 const TravelsScreen = ({ navigation }) => {
-    const travels = useTravelStore((state) => state.travels, shallow);
-    const getTravels = useTravelStore((state) => state.fetch);
+    const travels = useTravelStore((state) => state.travels, shallow)
+    const getTravels = useTravelStore((state) => state.fetch)
+    const [isSearched, setIsSearched] = useState(false)
+    const [selectedStartLocation, setSelectedStartLocation] = useState(null)
+    const [selectedEndLocation, setSelectedEndLocation] = useState(null)
+
+    const cities = ["Adana","Adiyaman","Afyonkarahisar","Ağrı","Amasya","Ankara","Antalya","Artvin","Aydın",
+                    "Balıkesir","Bilecik","Bingöl","Bitlis","Bolu","Burdur","Bursa","Çanakkale","Çankırı",
+                    "Çorum","Denizli","Diyarbakır","Edirne","Elazığ","Erzincan","Erzurum","Eskişehir",
+                    "Gaziantep","Giresun","Günüşhane","Hakkari","Hatay","Isparta","Mersin","İstanbul",
+                    "İzmir","Kars","Kastamonu","Kayseri","Kırklareli","Kırşehir","Kocaeli","Konya",
+                    "Kütahya","Malatya","Malatya","Manisa","Kahramanmaraş","Mardin","Muğla","Muş",
+                    "Nevşehir","Niğde","Ordu","Rize","Sakarya","Samsun","Siirt","Sinop","Sivas",
+                    "Tekirdağ","Tokat","Trabzon","Tunceli","Şanlıurfa","Uşak","Van","Yozxgat",
+                    "Zonguldak","Aksaray","Bayburt","Karaman","Kırıkkale","Batman","Şırnak",
+                    "Bartın","Ardahan","Iğdır","Yalova","Karabük","Kilis","Osmaniye","Düzce"]
 
     const goAddTravelScreen = () => {
         navigation.navigate('AddTravelScreen')
@@ -75,6 +90,46 @@ const TravelsScreen = ({ navigation }) => {
         )
     }
 
+    const CityDropDown = () => {
+        return(
+            <View style={Styles.baseStyle.cityDropdownContainer}>
+                <SelectDropdown
+                    data={cities}
+                    dropdownStyle={Styles.baseStyle.cityDropdown}
+                    onSelect={(selectedItem, index) => {
+                        setSelectedStartLocation(selectedItem)
+                        console.log(selectedStartLocation)
+                    }}
+                    buttonStyle={Styles.baseStyle.cityDropdown}
+                    defaultButtonText="Select a city"
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                        return selectedItem
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        return item
+                    }}
+                />
+
+                <SelectDropdown
+                    data={cities}
+                    dropdownStyle={Styles.baseStyle.cityDropdown}
+                    onSelect={(selectedItem, index) => {
+                        setSelectedEndLocation(selectedItem)
+                        console.log(selectedEndLocation)
+                    }}
+                    buttonStyle={Styles.baseStyle.cityDropdown}
+                    defaultButtonText="Select a city"
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                        return selectedItem
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        return item
+                    }}
+                />
+            </View>
+        )
+    }
+
     useEffect(() => {
         getTravels()
         const interval = setInterval(() => {
@@ -83,7 +138,7 @@ const TravelsScreen = ({ navigation }) => {
         return () => {
             clearInterval(interval)
         }
-    }, []) 
+    }, [selectedStartLocation,selectedEndLocation]) 
     
 
     return(
@@ -92,8 +147,48 @@ const TravelsScreen = ({ navigation }) => {
                 <TopNav />
             </View>
             {
-                travels ? 
+                isSearched ? <CityDropDown /> : (
+                travels ? (
                 <View style={Styles.baseStyle.travelCardsContainer}>
+                    <View style={Styles.baseStyle.cityDropdownContainer}>
+                        <SelectDropdown
+                            data={cities}
+                            dropdownStyle={Styles.baseStyle.cityDropdown}
+                            onSelect={(selectedItem, index) => {
+                                setSelectedStartLocation(selectedItem)
+                            }}
+                            buttonStyle={Styles.baseStyle.cityDropdown}
+                            defaultButtonText="Select a city"
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                return selectedItem
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                        />
+
+                        <SelectDropdown
+                            data={cities}
+                            dropdownStyle={Styles.baseStyle.cityDropdown}
+                            onSelect={(selectedItem, index) => {
+                                setSelectedEndLocation(selectedItem)
+                            }}
+                            buttonStyle={Styles.baseStyle.cityDropdown}
+                            defaultButtonText="Select a city"
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                return selectedItem
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                        />
+                        <TouchableOpacity onPress={null}>
+                            <Image 
+                                source={require('../images/searchIcon.png')}
+                                style={Styles.baseStyle.searchIcon}
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <FlatList
                         data={travels.reverse()}
                         renderItem={({item}) => (
@@ -110,7 +205,8 @@ const TravelsScreen = ({ navigation }) => {
                         )}
                     />
                 </View>
-                : <View></View>
+                ): null
+                )
             }
         </View>
     );

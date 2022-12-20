@@ -79,6 +79,20 @@ const baseStyle = StyleSheet.create({
         width: '100%',
         height: '100%',
         borderRadius: 100,
+    },
+    cityDropdownContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+    cityDropdown: {
+        borderRadius: 10,
+        backgroundColor: '#53D8A9',
+        width: '40%'
+    },
+    searchIcon: {
+        width: 30,
+        height: 30,
     }
 })
 

@@ -7,19 +7,6 @@ import SettingsScreen from '../screens/SettingsScreen';
 
 const MainTabNav = () => {
     const logout = useAuthStore((state) => state.logout)
-
-    function SettingsScreen2() {
-        return (
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Profile!</Text>
-            <View>
-                          <TouchableOpacity onPress={logout} style={{backgroundColor: 'red', width: '75%', alignItems: 'center', height: 30, justifyContent: 'center', marginTop: 20}}>
-                              <Text>Logout</Text>
-                          </TouchableOpacity>
-                      </View>
-          </View>
-        );
-      }
       
     const Tab = createBottomTabNavigator();
 
