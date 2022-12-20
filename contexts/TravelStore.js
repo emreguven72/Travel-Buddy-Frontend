@@ -10,6 +10,10 @@ const useTravelStore = create((set) => ({
         const response = await axios.get('http://192.168.0.113:8080/api/travels/getAll');
         set({ travels: await response.data });
     },
+    fetchByLocations: async(startLocation,endLocation) => {
+        const response = await axios.get(`http://192.168.0.113:8080/api/travels/getByLocations?startLocation=${startLocation}&endLocation=${endLocation}`)
+        set({ travels: await response.data })
+    },
     addTravel: async(startLocation,endLocation,userInfo,description,carDetails) => {
         try {
             await travelService.createTravel(startLocation,endLocation,userInfo,description,carDetails);
