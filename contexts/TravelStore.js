@@ -17,8 +17,6 @@ const useTravelStore = create((set) => ({
     addTravel: async(startLocation,endLocation,userInfo,description,carDetails) => {
         try {
             await travelService.createTravel(startLocation,endLocation,userInfo,description,carDetails);
-            const response = await axios.get('http://192.168.0.113:8080/api/travels/getAll');
-            set({ travels: await response.data });
         } catch(e) {
             console.log('addTravel Error: ', e)
         }

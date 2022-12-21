@@ -13,16 +13,10 @@ const baseStyle = StyleSheet.create({
     LogoAndAppNameContainer: {
         flexDirection: 'column'
     },
-    AppNameText: {
-        fontSize: 36,
-        alignSelf: 'center',
-        marginLeft: 10,
-        color: '#FF6464'
-    },
     SloganText: {
         fontSize: 20,
         marginTop: 10,
-        color: '#674747'
+        color: '#000000'
     },
     Logo: {
         height: 100,
@@ -54,12 +48,14 @@ const baseStyle = StyleSheet.create({
         fontSize: 16,
         marginRight: 'auto',
         marginLeft: 'auto',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        color: '#000000'
     },
     LogInText: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginLeft: 5
+        marginLeft: 5,
+        color: '#53D8A9'
     },
 })
 

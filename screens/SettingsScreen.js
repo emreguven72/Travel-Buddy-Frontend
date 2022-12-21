@@ -5,6 +5,10 @@ import useAuthStore from "../contexts/AuthStore";
 
 const SettingsScreen = ({ navigation }) => {
     const logout = useAuthStore((state) => state.logout)
+
+    const goAccountScreen = () => {
+        navigation.navigate('AccountScreen')
+    }
     
     const SettingsHeader = () => {
         return(
@@ -20,7 +24,7 @@ const SettingsScreen = ({ navigation }) => {
         <View style={Styles.baseStyle.container}>
             <SettingsHeader />
             <View style={Styles.baseStyle.optionsContainer}>
-                <TouchableOpacity style={Styles.baseStyle.option}>
+                <TouchableOpacity onPress={goAccountScreen} style={Styles.baseStyle.option}>
                     <Image 
                         source={require('../images/accountIcon.png')}
                         style={Styles.baseStyle.optionIcon}

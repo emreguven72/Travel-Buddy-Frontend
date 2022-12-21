@@ -124,5 +124,4 @@ const GoogleButton = () => {
     </View>
   );
 }
-
 export default SignInScreen;

@@ -9,7 +9,6 @@ import useAuthStore from "../contexts/AuthStore";
 
 const AddTravelScreen = ({ navigation }) => {
     const addTravel = useTravelStore((state) => state.addTravel);
-    const getTravels = useTravelStore((state) => state.fetch)
     const authInfo = useAuthStore((state) => state.authInfo)
 
     const goBack = () => {
@@ -20,7 +19,6 @@ const AddTravelScreen = ({ navigation }) => {
     const createTravel = (formValues) => {
         if(formValues.startLocation!=''&&formValues.endLocation!=''&&formValues.description!=''&&formValues.carDetails!='') {
             addTravel(formValues.startLocation,formValues.endLocation,authInfo,formValues.description,formValues.carDetails);
-            getTravels();
             goBack();
         }
     }
