@@ -28,7 +28,7 @@ const TravelsScreen = ({ navigation }) => {
         navigation.navigate('AddTravelScreen')
     }
 
-    const goTravelDetails = (startLocation,endLocation,userName,userImage,description,carDetails,userId) => {
+    const goTravelDetails = (startLocation,endLocation,userName,userImage,description,carDetails,userId,name,email) => {
         navigation.navigate('TravelDetailsScreen', {
             userImage: userImage,
             startLocation: startLocation,
@@ -36,7 +36,9 @@ const TravelsScreen = ({ navigation }) => {
             description: description,
             carDetails: carDetails,
             username: userName,
-            userId: userId
+            userId: userId,
+            name: name,
+            email: email
         })
     }
 
@@ -69,9 +71,9 @@ const TravelsScreen = ({ navigation }) => {
         );
     }
 
-    const TravelCard = ({ startLocation, endLocation, userName, userImage, description, carDetails, userId }) => {
+    const TravelCard = ({ startLocation, endLocation, userName, userImage, description, carDetails, userId, name, email }) => {
         return(
-            <TouchableOpacity onPress={() => goTravelDetails(startLocation,endLocation,userName,userImage,description,carDetails,userId)} style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
+            <TouchableOpacity onPress={() => goTravelDetails(startLocation,endLocation,userName,userImage,description,carDetails,userId,name,email)} style={Styles.baseStyle.travelCardContainer} activeOpacity={0.5}>
                 <View style={Styles.baseStyle.travelCardTravelImage}>
                     <Text>Picture About Travel</Text>
                 </View>
@@ -215,6 +217,8 @@ const TravelsScreen = ({ navigation }) => {
                                 description={item.description}
                                 carDetails={item.carDetails}
                                 userId={item.user.id}
+                                name={item.user.name}
+                                email={item.user.email}
                             />
                         )}
                     />

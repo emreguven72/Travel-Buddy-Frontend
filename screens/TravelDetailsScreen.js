@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { Text, Image, View, TouchableOpacity, ScrollView } from "react-native";
-import useTravelStore from "../contexts/TravelStore";
 import Styles from '../styles/TravelDetailsScreenStyle'
 import BasicButton from '../components/BasicButton'
 import Map from "../components/Map";
+import useAuthStore from "../contexts/AuthStore";
+import { Linking } from 'react-native'
 
 const TravelDetailsScreen = ({ navigation, route }) => {
+    const authInfo = useAuthStore((state) => state.authInfo)
 
     const {
         userImage,
@@ -14,8 +16,17 @@ const TravelDetailsScreen = ({ navigation, route }) => {
         description,
         carDetails,
         username,
-        userId
+        userId,
+        name,
+        email
     } = route.params
+
+    const sendEmail = () => {
+        const sendTo = email
+        const defaultSubject = `TravelBuddy join request`
+        const defaultBody = `Hi ${name},\nI am ${authInfo.name} and i want to join your travel from ${startLocation} to ${endLocation}. Please let me know if i can join you.`
+        Linking.openURL(`mailto:${sendTo}?subject=${defaultSubject}&body=${defaultBody}`)
+    }
 
     return(
         <View style={Styles.baseStyle.container}>
@@ -48,7 +59,7 @@ const TravelDetailsScreen = ({ navigation, route }) => {
                     <BasicButton 
                         title="Join Travel"
                         color="#53D8A9"
-                        onPress={null}
+                        onPress={sendEmail}
                     />
                 </View>
             </View>

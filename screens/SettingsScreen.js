@@ -4,6 +4,7 @@ import Styles from '../styles/SettingsScreenStyle';
 import useAuthStore from "../contexts/AuthStore";
 
 const SettingsScreen = ({ navigation }) => {
+    const authInfo = useAuthStore((state) => state.authInfo)
     const logout = useAuthStore((state) => state.logout)
 
     const goAccountScreen = () => {
@@ -82,5 +83,3 @@ const SettingsScreen = ({ navigation }) => {
     )
 }
 export default SettingsScreen
-
-//GOOGLE API KEY = AIzaSyA4kojC9WKLpgXhq7GnRqbVspxtaEdOA24
