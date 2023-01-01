@@ -1,12 +1,12 @@
 import axios from "react-native-axios";
 import UserService from "./userService";
 
-//Desktop ip address: 192.168.0.113
+//Desktop ip address: 192.168.0.12
 
 export default class TravelService {
     async getAllTravels() {
         try {
-            const response = await axios.get('http://192.168.0.113:8080/api/travels/getAll')
+            const response = await axios.get('http://192.168.0.12:8080/api/travels/getAll')
             return response.data;
         } catch(e) {
             console.log('getAllTravels request error', {e});
@@ -17,7 +17,7 @@ export default class TravelService {
         try {
             let userService = new UserService();
             let user = await userService.getById(userInfo.id);
-            await axios.post(`http://192.168.0.113:8080/api/travels/add`,{
+            await axios.post(`http://192.168.0.12:8080/api/travels/add`,{
                 startLocation: startLocation,
                 endLocation: endLocation,
                 user: user,

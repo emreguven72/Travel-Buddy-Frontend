@@ -2,10 +2,17 @@ import react, { useEffect, useState } from "react";
 import { View, Text, Image, } from "react-native";
 import Styles from '../styles/AccountScreenStyle'
 import useAuthStore from "../contexts/AuthStore";
+import BasicButton from "../components/BasicButton";
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
     const authInfo = useAuthStore((state) => state.authInfo)
     const authTravels = useAuthStore((state) => state.authTravels)
+
+    const showMyTravels = () => {
+        navigation.navigate('MyTravelsScreen', {
+            authTravels: authTravels
+        })
+    }
 
     const UserImageAndUsername = () => {
         return(
@@ -48,6 +55,17 @@ const AccountScreen = () => {
                     header='Phone number'
                     userInfo={authInfo.phoneNumber}
                 />
+                <Information 
+                    header='Travel Number'
+                    userInfo={authTravels.length}
+                />
+                <View style={{marginTop:20}}>
+                    <BasicButton 
+                        title="My Travels"
+                        color="#53D8A9"
+                        onPress={showMyTravels}
+                    />
+                </View>
             </View>
         )
     }
@@ -55,18 +73,13 @@ const AccountScreen = () => {
     const Information = ({header, userInfo}) => {
         return(
             <View style={Styles.baseStyle.information}>
-                    <View style={Styles.baseStyle.informaitonHeaderContainer}>
-                        <Text style={Styles.baseStyle.informationHeaderText}>{header}:</Text>
-                    </View>
-                    <Text style={Styles.baseStyle.informationUserText}>{userInfo}</Text>
+                <View style={Styles.baseStyle.informaitonHeaderContainer}>
+                    <Text style={Styles.baseStyle.informationHeaderText}>{header}:</Text>
                 </View>
+                <Text style={Styles.baseStyle.informationUserText}>{userInfo}</Text>
+            </View>
         )
     }
-
-    useEffect(() => {
-        console.log(authTravels.length)
-    }, [])
-    
 
     return(
         <View style={Styles.baseStyle.container}>

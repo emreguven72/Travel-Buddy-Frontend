@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Text, Image, View, TouchableOpacity, ScrollView } from "react-native";
 import Styles from '../styles/TravelDetailsScreenStyle'
 import BasicButton from '../components/BasicButton'
-import Map from "../components/Map";
+//import Map from "../components/Map";
 import useAuthStore from "../contexts/AuthStore";
 import { Linking } from 'react-native'
 
@@ -32,7 +32,7 @@ const TravelDetailsScreen = ({ navigation, route }) => {
         <View style={Styles.baseStyle.container}>
             <View style={Styles.baseStyle.imageSectionContainer}>
                 <Image 
-                    source={require('../images/carImagExample.jpg')} //TODO: add the car image dynamically here
+                    source={require('../images/karavan1.jpeg')} //TODO: add the car image dynamically here
                     style={Styles.baseStyle.carImage}
                 />
                 <View style={Styles.baseStyle.userInfoSection}>
@@ -48,20 +48,23 @@ const TravelDetailsScreen = ({ navigation, route }) => {
             <ScrollView style={Styles.baseStyle.travelDetailsSectionContainer}>
                 <Text style={Styles.baseStyle.locationTexts}>{startLocation} {"--->"} {endLocation}</Text>
                 <Text style={Styles.baseStyle.descriptionText}>{description}</Text>
-                <Text style={Styles.baseStyle.carDetailsText}>{carDetails}</Text>
+                <Text style={Styles.baseStyle.carDetailsText}>Araç: {carDetails}</Text>
             </ScrollView>
             <View style={Styles.baseStyle.mapSection}>
                 <View style={Styles.baseStyle.map}>
-                    <Map />
+                    <Text style={{textAlign:'center',fontSize:24,marginTop:'auto',marginBottom:'auto'}}>Map Component</Text>
                 </View> 
-
-                <View style={Styles.baseStyle.joinTravelButtonContainer}>
-                    <BasicButton 
-                        title="Join Travel"
-                        color="#53D8A9"
-                        onPress={sendEmail}
-                    />
-                </View>
+                {
+                    username != authInfo.username ? (
+                        <View style={Styles.baseStyle.joinTravelButtonContainer}>
+                            <BasicButton 
+                                title="Join Travel"
+                                color="#53D8A9"
+                                onPress={sendEmail}
+                            />
+                        </View>
+                    ) : null
+                }
             </View>
         </View>
     )

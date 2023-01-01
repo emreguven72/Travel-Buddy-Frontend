@@ -8,8 +8,8 @@ const useAuthStore = create((set) => ({
     authInfo: null,
     authTravels: null,
     login: async(email,password) => {
-        const response = await axios.get(`http://192.168.0.113:8080/api/users/getByEmail?email=${email}`);
-        const response2 = await axios.get(`http://192.168.0.113:8080/api/travels/getByUser?id=${response.data.id}`);
+        const response = await axios.get(`http://192.168.0.12:8080/api/users/getByEmail?email=${email}`);
+        const response2 = await axios.get(`http://192.168.0.12:8080/api/travels/getByUser?id=${response.data.id}`);
         set({ isLoading: true });
         if(response.data.password === password){
             set({ authInfo: await response.data });

@@ -5,6 +5,7 @@ import AddTravelScreen from "../screens/AddTravelScreen";
 import MainTabNav from "./MainTabNav";
 import TravelDetailsScreen from "../screens/TravelDetailsScreen";
 import AccountScreen from "../screens/AccountScreen";
+import MyTravelsScreen from "../screens/MyTravelsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,10 @@ const AppStack = () => {
                 <Stack.Screen 
                     name="AccountScreen"
                     component={AccountScreen}
+                />
+                <Stack.Screen 
+                    name="MyTravelsScreen"
+                    component={MyTravelsScreen}
                 />
             </Stack.Navigator>
     );
